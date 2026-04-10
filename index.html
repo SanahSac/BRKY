@@ -1,0 +1,659 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2487.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1">&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"&gt;</p>
+<p class="p1">&lt;meta name="apple-mobile-web-app-capable" content="yes"&gt;</p>
+<p class="p1">&lt;meta name="apple-mobile-web-app-status-bar-style" content="default"&gt;</p>
+<p class="p1">&lt;meta name="apple-mobile-web-app-title" content="BRKY"&gt;</p>
+<p class="p1">&lt;title&gt;BRKY&lt;/title&gt;</p>
+<p class="p1">&lt;style&gt;</p>
+<p class="p1">*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}</p>
+<p class="p1">:root{</p>
+<p class="p1"><span class="Apple-converted-space">  </span>--bg:#fff;--bg2:#f5f5f3;--bg3:#efefec;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>--text:#111;--text2:#555;--text3:#aaa;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>--border:rgba(0,0,0,.1);--border2:rgba(0,0,0,.18);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>--green:#1D9E75;--green-bg:#E1F5EE;--green-text:#085041;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>--radius:12px;--radius-sm:8px;</p>
+<p class="p1">}</p>
+<p class="p1">@media(prefers-color-scheme:dark){:root{</p>
+<p class="p1"><span class="Apple-converted-space">  </span>--bg:#1c1c1e;--bg2:#2c2c2e;--bg3:#3a3a3c;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>--text:#f2f2f7;--text2:#aeaeb2;--text3:#636366;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>--border:rgba(255,255,255,.1);--border2:rgba(255,255,255,.2);</p>
+<p class="p1">}}</p>
+<p class="p1">body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg2);color:var(--text);font-size:16px}</p>
+<p class="p1">.app{max-width:500px;margin:0 auto;min-height:100vh;background:var(--bg2)}</p>
+<p class="p2"><br></p>
+<p class="p1">/* TOPBAR */</p>
+<p class="p1">.topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 10px;background:var(--bg);border-bottom:0.5px solid var(--border);position:sticky;top:0;z-index:20}</p>
+<p class="p1">.logo{font-size:22px;font-weight:600;color:var(--green);letter-spacing:.08em}</p>
+<p class="p1">.logo-sub{font-size:11px;color:var(--text3);letter-spacing:.04em}</p>
+<p class="p2"><br></p>
+<p class="p1">/* NAV */</p>
+<p class="p1">.nav{display:flex;background:var(--bg);border-bottom:0.5px solid var(--border);position:sticky;top:53px;z-index:19}</p>
+<p class="p1">.nav-btn{flex:1;padding:11px 4px;font-size:12px;font-weight:500;color:var(--text2);background:transparent;border:none;cursor:pointer;border-bottom:2px solid transparent;transition:color .15s}</p>
+<p class="p1">.nav-btn.active{color:var(--green);border-bottom:2px solid var(--green)}</p>
+<p class="p2"><br></p>
+<p class="p1">.screen{display:none;padding:14px 14px 40px}</p>
+<p class="p1">.screen.active{display:block}</p>
+<p class="p2"><br></p>
+<p class="p1">/* PHASE */</p>
+<p class="p1">.phase-bar{display:flex;gap:3px;border-radius:var(--radius-sm);overflow:hidden;margin-bottom:10px}</p>
+<p class="p1">.phase-seg{flex:1;padding:8px 4px;text-align:center}</p>
+<p class="p1">.ph-name{font-size:10px;font-weight:600;display:block;margin-bottom:1px}</p>
+<p class="p1">.ph-days{font-size:9px;opacity:.7}</p>
+<p class="p1">.phase-seg.current{outline:2px solid rgba(0,0,0,.3);outline-offset:-2px}</p>
+<p class="p2"><br></p>
+<p class="p1">.banner{border:0.5px solid var(--border);border-radius:var(--radius);padding:12px 14px;margin-bottom:10px;display:flex;align-items:center;gap:10px;background:var(--bg)}</p>
+<p class="p1">.dot{width:11px;height:11px;border-radius:50%;flex-shrink:0}</p>
+<p class="p1">.banner-label{font-size:14px;font-weight:600;color:var(--text)}</p>
+<p class="p1">.banner-sub{font-size:12px;color:var(--text2);margin-top:2px;line-height:1.4}</p>
+<p class="p2"><br></p>
+<p class="p1">.seed-strip{border-radius:var(--radius-sm);padding:11px 13px;margin-bottom:10px;display:grid;grid-template-columns:1fr 1fr;gap:10px}</p>
+<p class="p1">.seed-strip h4{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}</p>
+<p class="p1">.seed-strip p{font-size:12px;line-height:1.5}</p>
+<p class="p1">.seed-strip .why{font-size:10px;opacity:.75;margin-top:2px}</p>
+<p class="p2"><br></p>
+<p class="p1">/* TRAVEL ROW */</p>
+<p class="p1">.travel-row{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}</p>
+<p class="p1">.travel-row label{font-size:12px;color:var(--text2)}</p>
+<p class="p1">.travel-row select{font-size:12px;padding:5px 9px;border-radius:var(--radius-sm);border:0.5px solid var(--border2);background:var(--bg);color:var(--text)}</p>
+<p class="p2"><br></p>
+<p class="p1">/* WEEK TABS */</p>
+<p class="p1">.week-tabs{display:flex;gap:5px;margin-bottom:10px}</p>
+<p class="p1">.week-tab{flex:1;padding:6px 4px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);background:transparent;cursor:pointer;font-size:12px;color:var(--text2);text-align:center}</p>
+<p class="p1">.week-tab.active{background:var(--bg3);color:var(--text);font-weight:600;border-color:var(--border2)}</p>
+<p class="p2"><br></p>
+<p class="p1">/* DAY GRID */</p>
+<p class="p1">.day-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px;margin-bottom:10px}</p>
+<p class="p1">.day-card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius);padding:9px 7px;cursor:pointer;transition:border-color .15s}</p>
+<p class="p1">.day-card.selected{border-width:2px}</p>
+<p class="p1">.day-label{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}</p>
+<p class="p1">.meal-name{font-size:10px;font-weight:600;color:var(--text);margin-bottom:4px;line-height:1.3}</p>
+<p class="p1">.pip{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:2px;vertical-align:middle}</p>
+<p class="p1">.phase-tag{font-size:9px;font-weight:500}</p>
+<p class="p1">.now-pill{font-size:8px;background:currentColor;color:#fff;padding:1px 4px;border-radius:999px;margin-left:3px;opacity:.9}</p>
+<p class="p1">.badges{display:flex;flex-wrap:wrap;gap:2px;margin-top:4px}</p>
+<p class="p1">.badge{font-size:8px;padding:2px 5px;border-radius:999px;font-weight:600}</p>
+<p class="p1">.bp{background:#E1F5EE;color:#085041}</p>
+<p class="p1">.bn{background:#EEEDFE;color:#3C3489}</p>
+<p class="p1">.bt{background:#F1EFE8;color:#5F5E5A}</p>
+<p class="p1">.bb{background:#FAEEDA;color:#633806}</p>
+<p class="p1">.bstar{background:#FFF3CD;color:#856404}</p>
+<p class="p2"><br></p>
+<p class="p1">/* RECIPE */</p>
+<p class="p1">.recipe-card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:10px}</p>
+<p class="p1">.recipe-brand{font-size:10px;font-weight:700;color:var(--green);letter-spacing:.08em;margin-bottom:5px}</p>
+<p class="p1">.recipe-card h2{font-size:17px;font-weight:700;color:var(--text);margin-bottom:5px}</p>
+<p class="p1">.recipe-desc{font-size:13px;color:var(--text2);margin-bottom:10px;line-height:1.5}</p>
+<p class="p1">.phase-reason{font-size:12px;padding:8px 11px;border-radius:var(--radius-sm);margin-bottom:10px;line-height:1.5}</p>
+<p class="p1">.bolton-note{font-size:12px;padding:8px 11px;border-radius:var(--radius-sm);margin-bottom:10px;background:#FAEEDA;color:#633806;line-height:1.5}</p>
+<p class="p2"><br></p>
+<p class="p1">.seed-box{border-radius:var(--radius-sm);padding:10px 12px;margin-bottom:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px}</p>
+<p class="p1">.seed-box h4{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}</p>
+<p class="p1">.seed-box p{font-size:12px;line-height:1.5}</p>
+<p class="p1">.seed-box .why{font-size:10px;opacity:.75;margin-top:2px}</p>
+<p class="p2"><br></p>
+<p class="p1">/* MACROS */</p>
+<p class="p1">.macros{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:12px}</p>
+<p class="p1">.mc{background:var(--bg2);border-radius:var(--radius-sm);padding:9px 6px;text-align:center}</p>
+<p class="p1">.mc-val{font-size:19px;font-weight:700;color:var(--text);display:block}</p>
+<p class="p1">.mc-lbl{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-top:2px}</p>
+<p class="p2"><br></p>
+<p class="p1">/* SERVINGS */</p>
+<p class="p1">.srv-row{display:flex;align-items:center;gap:12px;margin-bottom:12px;padding:10px 12px;background:var(--bg2);border-radius:var(--radius-sm)}</p>
+<p class="p1">.srv-row label{font-size:13px;color:var(--text2);flex:1}</p>
+<p class="p1">.srv-btn{width:30px;height:30px;border-radius:50%;border:0.5px solid var(--border2);background:var(--bg);cursor:pointer;font-size:18px;color:var(--text);display:flex;align-items:center;justify-content:center;font-weight:300}</p>
+<p class="p1">.srv-count{font-size:16px;font-weight:700;color:var(--text);min-width:22px;text-align:center}</p>
+<p class="p2"><br></p>
+<p class="p1">.rsec{margin-bottom:12px}</p>
+<p class="p1">.rsec h3{font-size:11px;font-weight:600;color:var(--text2);margin-bottom:5px;text-transform:uppercase;letter-spacing:.05em}</p>
+<p class="p1">.rsec ul,.rsec ol{padding-left:1.1rem}</p>
+<p class="p1">.rsec li{font-size:13px;color:var(--text);line-height:1.9}</p>
+<p class="p1">.abheek{background:var(--bg2);border-left:3px solid var(--green);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:9px 12px;font-size:12px;color:var(--text2);margin-bottom:12px}</p>
+<p class="p1">.print-btn{width:100%;padding:10px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);background:transparent;font-size:13px;font-weight:500;color:var(--text);cursor:pointer}</p>
+<p class="p1">.print-btn:active{background:var(--bg2)}</p>
+<p class="p2"><br></p>
+<p class="p1">/* SECTION HEADER */</p>
+<p class="p1">.section-header{font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px}</p>
+<p class="p2"><br></p>
+<p class="p1">/* GROCERY */</p>
+<p class="p1">.grocery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:7px}</p>
+<p class="p1">.grocery-cat{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius);padding:10px 12px}</p>
+<p class="p1">.grocery-cat h4{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--text3);margin-bottom:5px}</p>
+<p class="p1">.grocery-cat li{font-size:12px;color:var(--text);list-style:none;line-height:1.9}</p>
+<p class="p2"><br></p>
+<p class="p1">/* MATCH */</p>
+<p class="p1">.match-header{font-size:15px;font-weight:700;color:var(--text);margin-bottom:3px}</p>
+<p class="p1">.match-sub{font-size:13px;color:var(--text2);margin-bottom:12px;line-height:1.5}</p>
+<p class="p1">.match-input-row{display:flex;gap:7px;margin-bottom:10px}</p>
+<p class="p1">.match-input-row input{flex:1;font-size:14px;padding:9px 12px;border-radius:var(--radius-sm);border:0.5px solid var(--border2);background:var(--bg);color:var(--text)}</p>
+<p class="p1">.match-input-row input::placeholder{color:var(--text3)}</p>
+<p class="p1">.btn-green{background:var(--green);color:#fff;border:none;border-radius:var(--radius-sm);padding:9px 16px;font-size:13px;font-weight:600;cursor:pointer}</p>
+<p class="p1">.tag-cloud{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;min-height:8px}</p>
+<p class="p1">.ing-tag{font-size:12px;padding:5px 10px;border-radius:999px;background:var(--bg);border:0.5px solid var(--border2);color:var(--text);display:flex;align-items:center;gap:5px}</p>
+<p class="p1">.ing-tag .rm{color:var(--text3);font-size:16px;line-height:1;cursor:pointer}</p>
+<p class="p1">.match-card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius);padding:13px 14px;margin-bottom:8px}</p>
+<p class="p1">.match-card h3{font-size:13px;font-weight:700;color:var(--text);margin-bottom:2px}</p>
+<p class="p1">.match-meta{font-size:11px;color:var(--text3);margin-bottom:5px}</p>
+<p class="p1">.match-bar-wrap{height:3px;background:var(--bg2);border-radius:2px;margin:5px 0 6px}</p>
+<p class="p1">.match-bar{height:3px;border-radius:2px;background:var(--green)}</p>
+<p class="p1">.match-desc{font-size:12px;color:var(--text2);line-height:1.5;margin-bottom:6px}</p>
+<p class="p1">.match-steps ol{padding-left:1rem}</p>
+<p class="p1">.match-steps li{font-size:12px;color:var(--text);line-height:1.8}</p>
+<p class="p1">.match-need{font-size:11px;color:var(--text3);margin-top:5px}</p>
+<p class="p1">.ai-tag{font-size:9px;background:#E6F1FB;color:#0C447C;padding:2px 6px;border-radius:999px;font-weight:600;margin-left:5px}</p>
+<p class="p1">.loading{font-size:13px;color:var(--text2);padding:2rem 0;text-align:center;opacity:.7;animation:pulse 1.2s infinite}</p>
+<p class="p1">@keyframes pulse{0%,100%{opacity:.7}50%{opacity:.2}}</p>
+<p class="p1">.empty{font-size:13px;color:var(--text3);padding:2.5rem 0;text-align:center}</p>
+<p class="p2"><br></p>
+<p class="p1">/* SETTINGS */</p>
+<p class="p1">.settings-card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:10px}</p>
+<p class="p1">.settings-card h3{font-size:14px;font-weight:700;color:var(--text);margin-bottom:10px}</p>
+<p class="p1">.field-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}</p>
+<p class="p1">.field-row label{font-size:12px;color:var(--text2);min-width:120px}</p>
+<p class="p1">.field-row input,.field-row select{font-size:13px;padding:6px 9px;border-radius:var(--radius-sm);border:0.5px solid var(--border2);background:var(--bg);color:var(--text)}</p>
+<p class="p1">.about-text{font-size:13px;color:var(--text2);line-height:1.7}</p>
+<p class="p2"><br></p>
+<p class="p1">/* PRINT */</p>
+<p class="p1">@media print{</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.nav,.topbar,.week-tabs,.day-grid,.print-btn,.srv-row,.travel-row,.phase-bar,.banner,.seed-strip,.section-header{display:none!important}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.screen{display:block!important;padding:0}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.recipe-card{border:none;padding:0;box-shadow:none}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>body,.app{background:#fff;color:#000;max-width:100%}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.seed-box,.phase-reason,.bolton-note{-webkit-print-color-adjust:exact;print-color-adjust:exact}</p>
+<p class="p1">}</p>
+<p class="p1">&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1">&lt;div class="app"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div class="topbar"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="logo"&gt;BRKY&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="logo-sub"&gt;breakfast by cycle&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div class="nav"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;button class="nav-btn active" onclick="showScreen('plan',this)"&gt;Plan&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;button class="nav-btn" onclick="showScreen('match',this)"&gt;What can I make?&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;button class="nav-btn" onclick="showScreen('settings',this)"&gt;Settings&lt;/button&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div id="plan" class="screen active"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="banner" id="banner"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="phase-bar" id="phaseBar"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="seed-strip" id="seedStrip"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="travel-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;label&gt;Travel:&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;select id="travelDay" onchange="renderPlan()"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;option value="sun"&gt;Sunday night → Mon–Thu in office&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;option value="mon"&gt;Monday night → Tue–Fri in office&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="week-tabs" id="weekTabs"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="day-grid" id="dayGrid"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="recipePanel"&gt;&lt;p class="empty"&gt;Tap a day to see the recipe&lt;/p&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div style="margin-top:14px"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="section-header"&gt;Weekly grocery list&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="grocery-grid" id="groceryGrid"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div id="match" class="screen"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="match-header"&gt;What can I make?&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="match-sub"&gt;Type what you have — BRKY suggests any warm vegetarian breakfast, not just your 20 planned recipes.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="match-input-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;input type="text" id="ingInput" placeholder="e.g. tofu, oats, avocado, miso..." onkeydown="if(event.key==='Enter')addIngredient()"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="btn-green" onclick="addIngredient()"&gt;Add&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="tag-cloud" id="tagCloud"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="matchResults"&gt;&lt;p class="empty"&gt;Add ingredients above to get AI suggestions&lt;/p&gt;&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div id="settings" class="screen"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="settings-card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;h3&gt;Cycle settings&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="field-row"&gt;&lt;label&gt;Last period started&lt;/label&gt;&lt;input type="date" id="periodStart" value="2026-03-12" onchange="renderPlan()"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="field-row"&gt;&lt;label&gt;Cycle length (days)&lt;/label&gt;&lt;input type="number" id="cycleLen" value="32" min="21" max="45" style="width:62px" onchange="renderPlan()"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="field-row"&gt;&lt;label&gt;Period length (days)&lt;/label&gt;&lt;input type="number" id="periodLen" value="3" min="2" max="8" style="width:54px" onchange="renderPlan()"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="settings-card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;h3&gt;About BRKY&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;p class="about-text"&gt;20 warm vegetarian breakfasts across 4 weeks, cycle-synced for hormonal support. Egg-free recipes — Abheek tips included. Seed cycling and phase fruits embedded in every recipe. Rotate monthly.&lt;br&gt;&lt;br&gt;Built with love in Claude.ai.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/div&gt;&lt;!-- .app --&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;script&gt;</p>
+<p class="p1">const PC={</p>
+<p class="p1"><span class="Apple-converted-space">  </span>menstrual:{dot:'#D4537E',bg:'#FBEAF0',text:'#72243E',label:'Menstrual'},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>follicular:{dot:'#378ADD',bg:'#E6F1FB',text:'#0C447C',label:'Follicular'},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ovulatory:{dot:'#1D9E75',bg:'#E1F5EE',text:'#085041',label:'Ovulatory'},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>luteal:{dot:'#BA7517',bg:'#FAEEDA',text:'#633806',label:'Luteal'}</p>
+<p class="p1">};</p>
+<p class="p1">const PW={</p>
+<p class="p1"><span class="Apple-converted-space">  </span>menstrual:'Iron, anti-inflammatory foods, warmth. Keep it gentle.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>follicular:'Estrogen rises. Protein and zinc support follicle growth.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ovulatory:'Peak estrogen. Antioxidants support liver clearance.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>luteal:'Magnesium, complex carbs, B6 ease PMS and cravings.'</p>
+<p class="p1">};</p>
+<p class="p1">const SEEDS={</p>
+<p class="p1"><span class="Apple-converted-space">  </span>menstrual:{seeds:'Flax + pumpkin seeds',why:'Omega-3s and zinc reduce cramping, replenish iron.',fruits:'Berries, pomegranate, oranges',fruitWhy:'Vitamin C enhances iron absorption.'},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>follicular:{seeds:'Flax + pumpkin seeds',why:'Flax supports estrogen balance; pumpkin seeds rich in zinc.',fruits:'Kiwi, mango, apple, berries',fruitWhy:'Light antioxidant fruits for rising energy.'},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ovulatory:{seeds:'Sesame + sunflower seeds',why:'Sesame metabolizes excess estrogen; sunflower adds vitamin E.',fruits:'Cherries, peaches, figs, tropical fruits',fruitWhy:'Antioxidants support peak estrogen clearance.'},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>luteal:{seeds:'Sesame + sunflower seeds',why:'Sunflower seeds are rich in B6 and magnesium.',fruits:'Banana, dates, baked apple, dried apricots',fruitWhy:'Complex carbs stabilize blood sugar and ease cravings.'}</p>
+<p class="p1">};</p>
+<p class="p2"><br></p>
+<p class="p1">const parathas={</p>
+<p class="p1"><span class="Apple-converted-space">  </span>moong:{name:'Moong dal stuffed paratha',protein:16,carbs:38,fibre:6,time:'20 min',prepNight:true,phase:'follicular',star:false,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>phaseReason:'Moong dal is a complete protein high in zinc and B vitamins — ideal for follicular phase rising energy.',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>desc:'Whole wheat parathas stuffed with spiced yellow moong dal. Made in Bolton, reheated in Toronto.',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>boltonNote:'Make in Bolton before you leave. Wrap in foil, refrigerate. Reheat in air fryer 4–5 min.',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ingredients:[{n:'Whole wheat flour',a:1,u:'cup'},{n:'Yellow moong dal, cooked and mashed',a:0.5,u:'cup'},{n:'Cumin + coriander + turmeric',a:0.5,u:'tsp each'},{n:'Green chili, chopped',a:1,u:''},{n:'Fresh coriander',a:2,u:'tbsp'},{n:'Ghee',a:1,u:'tsp'}],</p>
+<p class="p1"><span class="Apple-converted-space">    </span>steps:['Make soft dough with flour, salt, water. Rest 10 min.','Mix mashed moong with spices, chili, coriander.','Stuff dough ball with filling, seal, roll gently.','Cook on hot tawa with ghee until golden, ~3 min per side.'],</p>
+<p class="p1"><span class="Apple-converted-space">    </span>abheek:'Serve with yogurt and pickle — fried egg on the side.',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>nightPrep:'Cook dal, make dough, stuff and cook parathas in Bolton. Pack and refrigerate.',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>key:['moong dal','moong','wheat flour','flour','ghee','cumin','lentil']},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>paneer:{name:'Paneer and spinach stuffed paratha',protein:21,carbs:35,fibre:5,time:'20 min',prepNight:true,phase:'follicular',star:false,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>phaseReason:'Paneer is high in protein; spinach adds iron and folate — a powerful follicular phase combo.',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>desc:'Flaky parathas stuffed with crumbled paneer and spinach. Rich, filling, protein-packed.',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>boltonNote:'Make Monday night in Bolton before you travel. Reheat in air fryer 4–5 min.',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ingredients:[{n:'Whole wheat flour',a:1,u:'cup'},{n:'Paneer, crumbled',a:150,u:'g'},{n:'Spinach, finely chopped',a:1,u:'cup'},{n:'Cumin + red chili + garam masala',a:0.25,u:'tsp each'},{n:'Salt',a:1,u:'pinch'},{n:'Ghee',a:1,u:'tsp'}],</p>
+<p class="p1"><span class="Apple-converted-space">    </span>steps:['Make soft dough. Rest 10 min.','Mix crumbled paneer with raw spinach and spices.','Stuff dough ball, seal, roll gently.','Cook on hot tawa with ghee until golden, ~3 min per side.'],</p>
+<p class="p1"><span class="Apple-converted-space">    </span>abheek:'Serve with yogurt and mango pickle.',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>nightPrep:'Make filling and dough, cook parathas in Bolton. Pack. Reheat air fryer 4–5 min.',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>key:['paneer','spinach','wheat flour','flour','ghee','garam masala']}</p>
+<p class="p1">};</p>
+<p class="p2"><br></p>
+<p class="p1">const allMeals=[</p>
+<p class="p1">// WEEK 1</p>
+<p class="p1">{name:'Moong dal chilla',protein:18,carbs:28,fibre:7,time:'15 min',prepNight:false,phase:'follicular',star:false,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>phaseReason:'High lentil protein supports follicular phase cell growth and rising energy.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>desc:'Savory lentil crepes spiced with cumin and green chili. Crispy, light, protein-packed.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ingredients:[{n:'Yellow moong dal, soaked overnight',a:1,u:'cup'},{n:'Green chili + ginger, blended in',a:1,u:'each'},{n:'Cumin seeds',a:0.5,u:'tsp'},{n:'Fresh coriander',a:2,u:'tbsp'},{n:'Oil',a:1,u:'tsp'},{n:'Salt',a:1,u:'pinch'}],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>steps:['Drain soaked moong, blend with chili and ginger to smooth thin batter.','Add cumin, coriander, salt.','Pour ladleful on hot non-stick pan, spread thin. Drizzle oil.','Cook 2–3 min per side until golden.'],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>abheek:'Fried or scrambled egg on the side.',nightPrep:'Soak dal overnight, blend and refrigerate batter.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>key:['moong dal','moong','lentil','cumin','ginger','coriander']},</p>
+<p class="p1">{name:'Miso tahini oats',protein:15,carbs:36,fibre:6,time:'10 min',prepNight:true,phase:'follicular',star:true,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>phaseReason:'Miso is a probiotic fermented food; tahini adds zinc and healthy fats — both support the follicular phase gut-hormone axis.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>desc:'Creamy oats swirled with white miso and tahini, topped with sesame, cucumber, and chili oil. Japanese-meets-Middle-Eastern comfort.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ingredients:[{n:'Rolled oats',a:0.5,u:'cup'},{n:'White miso paste',a:1,u:'tsp'},{n:'Tahini',a:1,u:'tbsp'},{n:'Green onion + sesame seeds',a:1,u:'each'},{n:'Chili oil or red chili flakes',a:0.5,u:'tsp'},{n:'Cucumber, thinly sliced',a:4,u:'slices'}],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>steps:['Cook oats in 1 cup water or oat milk for 5 min.','Stir in miso and tahini until fully combined.','Top with sesame seeds, green onion, cucumber.','Drizzle chili oil on top.'],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>abheek:'Crack a soft-boiled egg on top.',nightPrep:'Cook oats and mix miso-tahini base night before. Reheat with a splash of water.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>key:['oats','miso','tahini','sesame','cucumber','chili oil','green onion']},</p>
+<p class="p1">{name:'Shakshuka-style tofu',protein:20,carbs:18,fibre:5,time:'20 min',prepNight:false,phase:'ovulatory',star:false,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>phaseReason:'Tomatoes are rich in lycopene — a powerful antioxidant supporting estrogen clearance at ovulation.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>desc:'Silken tofu poached in a spiced tomato and pepper sauce. All the comfort of shakshuka, egg-free.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ingredients:[{n:'Silken tofu',a:300,u:'g'},{n:'Canned crushed tomatoes',a:0.5,u:'cup'},{n:'Red bell pepper + onion + garlic',a:1,u:'each'},{n:'Cumin + smoked paprika',a:1,u:'tsp each'},{n:'Olive oil',a:1,u:'tsp'},{n:'Fresh parsley or coriander + pita',a:1,u:'each'}],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>steps:['Sauté onion, garlic and pepper in olive oil 5 min.','Add tomatoes, cumin, paprika, chili. Simmer 5 min.','Nestle sliced tofu into sauce. Cover, simmer 5 min.','Top with fresh herbs. Serve with pita.'],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>abheek:'Crack 2 eggs into the sauce alongside the tofu.',nightPrep:'Make sauce night before. Morning: reheat and add tofu.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>key:['tofu','tomato','pepper','garlic','cumin','paprika','pita','bread']},</p>
+<p class="p1">{name:'Tofu bhurji on sourdough',protein:19,carbs:30,fibre:4,time:'15 min',prepNight:false,phase:'luteal',star:false,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>phaseReason:'Tofu is rich in calcium and isoflavones — helps ease PMS and stabilize blood sugar.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>desc:'Scrambled spiced tofu with tomatoes and onion piled high on toasted sourdough.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ingredients:[{n:'Firm tofu, crumbled',a:200,u:'g'},{n:'Onion + tomato, diced',a:1,u:'each'},{n:'Turmeric + cumin + red chili',a:0.5,u:'tsp each'},{n:'Nutritional yeast (optional)',a:1,u:'tsp'},{n:'Sourdough bread',a:2,u:'slices'},{n:'Oil',a:1,u:'tsp'}],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>steps:['Press tofu, crumble with hands.','Sauté onion 3 min. Add tomato, cook 2 min. Add spices.','Add tofu, cook 4–5 min.','Pile on toasted sourdough.'],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>abheek:'Fried egg on the side.',nightPrep:'Crumble tofu, chop veg night before.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>key:['tofu','onion','tomato','turmeric','sourdough','bread']},</p>
+<p class="p1">{name:'Oat and red lentil porridge',protein:15,carbs:40,fibre:9,time:'15 min',prepNight:true,phase:'luteal',star:false,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>phaseReason:'Oats are high in magnesium and complex carbs — key for managing luteal phase cravings.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>desc:'Creamy savoury oat porridge with red lentils, turmeric, and cumin. Friday WFH comfort.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ingredients:[{n:'Rolled oats',a:0.5,u:'cup'},{n:'Red lentils',a:3,u:'tbsp'},{n:'Veg broth',a:2,u:'cups'},{n:'Turmeric + cumin',a:0.5,u:'tsp each'},{n:'Ghee',a:1,u:'tsp'},{n:'Greek yogurt (topping)',a:2,u:'tbsp'}],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>steps:['Combine oats, lentils, broth. Bring to boil.','Simmer 12 min stirring. Add spices.','Stir in ghee. Top with yogurt and chili flakes.'],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>abheek:'Stir a fried egg into his bowl.',nightPrep:'Cook fully, reheat with a splash of water.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>key:['oats','lentils','turmeric','cumin','ghee','yogurt']},</p>
+<p class="p1">// WEEK 2</p>
+<p class="p1">{name:'Mediterranean white bean bowl',protein:17,carbs:34,fibre:11,time:'12 min',prepNight:false,phase:'menstrual',star:true,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>phaseReason:'White beans are iron-rich and high in magnesium — replenishing what menstruation depletes.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>desc:'Warm herbed white beans with olive oil, lemon, roasted tomatoes, and za\'atar on warm flatbread.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ingredients:[{n:'White beans (cannellini), drained',a:1,u:'can'},{n:'Cherry tomatoes',a:0.5,u:'cup'},{n:'Garlic + olive oil + lemon juice',a:1,u:'each'},{n:'Za\'atar',a:1,u:'tsp'},{n:'Fresh parsley',a:1,u:'tbsp'},{n:'Flatbread or pita',a:1,u:''}],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>steps:['Halve tomatoes, air fry or pan-fry until blistered, 5–6 min.','Warm beans with garlic and olive oil, 4 min. Add lemon and za\'atar.','Warm flatbread. Top with beans, roasted tomatoes, parsley.'],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>abheek:'Soft-boiled egg on the side.',nightPrep:'Prep beans and roast tomatoes night before. Reheat morning.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>key:['white beans','beans','tomato','garlic','olive oil','lemon','za\'atar','flatbread','pita']},</p>
+<p class="p1">{name:'Tofu scramble with roti',protein:20,carbs:33,fibre:4,time:'15 min',prepNight:false,phase:'follicular',star:false,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>phaseReason:'Tofu is high in protein and zinc. Whole wheat roti supports gut health.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>desc:'Turmeric-spiced tofu scramble served with warm roti. Quick, protein-packed, globally loved.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ingredients:[{n:'Firm tofu, crumbled',a:200,u:'g'},{n:'Onion, diced',a:0.5,u:''},{n:'Turmeric + cumin',a:0.5,u:'tsp each'},{n:'Nutritional yeast (optional)',a:1,u:'tsp'},{n:'Oil',a:1,u:'tsp'},{n:'Roti',a:2,u:''}],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>steps:['Press and crumble tofu.','Sauté onion 2 min. Add spices.','Add tofu, cook 5–6 min. Serve with warmed roti.'],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>abheek:'Scrambled egg on the side.',nightPrep:'Press and crumble tofu, chop onion.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>key:['tofu','onion','turmeric','cumin','roti']},</p>
+<p class="p1">{name:'Miso congee with edamame',protein:18,carbs:36,fibre:5,time:'Set overnight + 5 min',prepNight:true,phase:'ovulatory',star:false,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>phaseReason:'Edamame and miso are fermented soy — zinc and phytoestrogens support estrogen metabolism.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>desc:'Umami Japanese congee with white miso, edamame, nori, and sesame. Set overnight, finish in 5 min.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ingredients:[{n:'Short-grain rice',a:0.5,u:'cup'},{n:'White miso paste',a:1,u:'tbsp'},{n:'Shelled edamame',a:0.5,u:'cup'},{n:'Sesame oil + soy sauce',a:1,u:'tsp each'},{n:'Green onion + sesame seeds',a:1,u:'each'},{n:'Nori strips',a:2,u:''}],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>steps:['Set rice and 4 cups water in congee maker overnight.','Stir miso into hot congee (don\'t boil after adding).','Warm edamame. Top with edamame, sesame oil, soy, green onion, nori.'],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>abheek:'Soft-boiled egg on top.',nightPrep:'Set congee maker. Defrost edamame in fridge.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>key:['rice','miso','edamame','sesame oil','soy sauce','nori','green onion']},</p>
+<p class="p1">{name:'Greek yogurt parfait (warm berries)',protein:20,carbs:28,fibre:3,time:'10 min',prepNight:true,phase:'luteal',star:false,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>phaseReason:'Greek yogurt is high in calcium and protein — both shown to reduce PMS severity.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>desc:'Warm stewed berries over thick Greek yogurt with granola and nut butter.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ingredients:[{n:'Thick Greek yogurt',a:0.75,u:'cup'},{n:'Frozen berries',a:0.5,u:'cup'},{n:'Nut butter',a:1,u:'tbsp'},{n:'Granola',a:2,u:'tbsp'},{n:'Honey',a:1,u:'tsp'},{n:'Cardamom',a:1,u:'pinch'}],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>steps:['Warm berries with cardamom 3–4 min until jammy.','Spoon yogurt into bowl. Top with warm berries.','Drizzle nut butter and honey. Add granola last.'],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>abheek:'Naturally shareable as-is.',nightPrep:'Stew berries night before. Reheat 30 sec.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>key:['greek yogurt','yogurt','berries','nut butter','granola','honey','cardamom']},</p>
+<p class="p1">{name:'Spiced guac toast with white beans',protein:16,carbs:35,fibre:11,time:'12 min',prepNight:false,phase:'luteal',star:false,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>phaseReason:'Avocado is loaded with magnesium and B6. White beans add protein and fibre.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>desc:'Smashed spiced guacamole on sourdough with warm white beans and smoked paprika.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ingredients:[{n:'Ripe avocados',a:2,u:''},{n:'Lime juice',a:1,u:'tbsp'},{n:'Cumin + red chili',a:0.25,u:'tsp each'},{n:'White beans, drained',a:0.5,u:'can'},{n:'Smoked paprika',a:0.5,u:'tsp'},{n:'Sourdough bread',a:2,u:'slices'}],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>steps:['Mash avocado with lime, cumin, chili, salt.','Warm beans in oil with smoked paprika, 3–4 min.','Toast sourdough. Spread guac, top with warm beans and coriander.'],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>abheek:'Fried or poached egg on top.',nightPrep:'Season beans night before. Mash guac fresh.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>key:['avocado','lime','white beans','beans','sourdough','bread','paprika']},</p>
+<p class="p1">// WEEK 3</p>
+<p class="p1">{name:'Besan cheela',protein:16,carbs:26,fibre:6,time:'15 min',prepNight:false,phase:'menstrual',star:false,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>phaseReason:'Chickpea flour is high in iron and folate. Ajwain helps with bloating and cramps.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>desc:'Thin golden crepes made with chickpea flour. Crispy, protein-packed, naturally gluten-free.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ingredients:[{n:'Besan (chickpea flour)',a:1,u:'cup'},{n:'Onion, finely chopped',a:0.5,u:''},{n:'Ajwain + turmeric + red chili',a:0.5,u:'tsp each'},{n:'Green chili + fresh coriander',a:1,u:'each'},{n:'Oil',a:1,u:'tsp'},{n:'Salt + water',a:1,u:'to taste'}],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>steps:['Mix besan with spices, onion, coriander and water to thin batter.','Pour ladle on hot pan, spread thin.','Drizzle oil, cook 2–3 min until edges lift. Flip, 1 more min.','Serve with yogurt or green chutney.'],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>abheek:'Fold a small omelette inside his cheela.',nightPrep:'Mix dry ingredients. Morning: add water and veg.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>key:['besan','chickpea flour','ajwain','onion','turmeric','coriander']},</p>
+<p class="p1">{name:'Korean gochujang oat bowl',protein:14,carbs:38,fibre:6,time:'12 min',prepNight:false,phase:'follicular',star:true,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>phaseReason:'Gochujang is a fermented paste — great for gut health and rising follicular phase energy.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>desc:'Savoury oats with gochujang, soy, sesame, pickled cucumber, and crispy chickpeas. Bold, warming, unexpected.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ingredients:[{n:'Rolled oats',a:0.5,u:'cup'},{n:'Gochujang paste',a:1,u:'tsp'},{n:'Soy sauce + sesame oil',a:1,u:'tsp each'},{n:'Canned chickpeas',a:0.5,u:'cup'},{n:'Cucumber + rice vinegar (quick pickle)',a:4,u:'slices'},{n:'Green onion + sesame seeds',a:1,u:'each'}],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>steps:['Quick-pickle cucumber with rice vinegar and salt, set aside.','Cook oats in 1 cup veg broth 5 min. Stir in gochujang, soy, sesame oil.','Pan-fry chickpeas dry 4 min until crispy.','Top oats with chickpeas, pickled cucumber, green onion, sesame seeds.'],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>abheek:'Fried egg on top.',nightPrep:'Cook oats and pickle cucumber night before.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>key:['oats','gochujang','soy sauce','sesame','chickpeas','cucumber','green onion']},</p>
+<p class="p1">{name:'Ginger scallion congee with tofu',protein:18,carbs:34,fibre:3,time:'Set overnight + 10 min',prepNight:true,phase:'ovulatory',star:false,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>phaseReason:'Ginger is anti-inflammatory. Tofu adds zinc and protein during your peak ovulatory phase.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>desc:'Fragrant ginger congee topped with cumin-seared tofu. East Asian comfort at its best.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ingredients:[{n:'Short-grain rice',a:0.5,u:'cup'},{n:'Ginger, grated',a:2,u:'tsp'},{n:'Firm tofu, cubed',a:200,u:'g'},{n:'Cumin seeds',a:0.5,u:'tsp'},{n:'Soy sauce + sesame oil',a:1,u:'tsp each'},{n:'Green onion',a:2,u:'stalks'}],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>steps:['Set rice and 4 cups veg broth in congee maker with ginger overnight.','Pan-fry tofu cubes with cumin seeds until golden.','Bowl congee. Top with tofu, soy, sesame oil, green onion.'],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>abheek:'Soft-boiled egg alongside.',nightPrep:'Set congee maker. Cube tofu and store in fridge.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>key:['rice','tofu','ginger','cumin','soy sauce','sesame oil','green onion']},</p>
+<p class="p1">{name:'Poha with peanuts',protein:13,carbs:42,fibre:4,time:'15 min',prepNight:false,phase:'luteal',star:false,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>phaseReason:'Peanuts are high in magnesium and B6. Poha is a gentle complex carb.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>desc:'Classic Indian flattened rice with mustard seeds, curry leaves, and roasted peanuts.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ingredients:[{n:'Thick poha (flattened rice)',a:1.5,u:'cup'},{n:'Roasted peanuts',a:0.25,u:'cup'},{n:'Onion + green chili',a:1,u:'each'},{n:'Mustard seeds + curry leaves',a:1,u:'tsp + 8'},{n:'Turmeric',a:0.5,u:'tsp'},{n:'Lemon juice + salt',a:1,u:'tsp'}],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>steps:['Rinse poha until just moist. Rest 5 min.','Temper mustard seeds and curry leaves in oil. Add onion and chili, 3 min.','Add turmeric. Add poha and peanuts, toss gently. Season with lemon.'],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>abheek:'Fried egg on the side.',nightPrep:'Roast peanuts and chop onion ahead.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>key:['poha','flattened rice','peanuts','mustard seeds','curry leaves','onion']},</p>
+<p class="p1">{name:'Lentil and spinach soup',protein:18,carbs:36,fibre:10,time:'Batch Thu, reheat Fri',prepNight:true,phase:'luteal',star:false,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>phaseReason:'Spinach is rich in magnesium and iron. Red lentils add protein and fibre.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>desc:'Thick Turkish-style red lentil soup with spinach and tomato. Make Thursday, reheat Friday.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ingredients:[{n:'Red lentils',a:1,u:'cup'},{n:'Onion + tomatoes',a:1,u:'each'},{n:'Spinach',a:2,u:'cups'},{n:'Veg broth',a:3,u:'cups'},{n:'Cumin + turmeric + coriander powder',a:0.5,u:'tsp each'},{n:'Lemon juice',a:1,u:'tbsp'}],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>steps:['Sauté onion 3 min. Add tomato and spices, cook 3 min.','Add lentils and broth. Simmer 20 min.','Add spinach, cook 2 min. Blend half if preferred. Squeeze lemon.'],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>abheek:'Serve with bread and fried egg on top.',nightPrep:'Make full batch Thursday. Friday is reheat only.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>key:['lentils','spinach','tomato','onion','cumin','turmeric']},</p>
+<p class="p1">// WEEK 4</p>
+<p class="p1">{name:'Spiced guac and black bean toast',protein:16,carbs:36,fibre:12,time:'12 min',prepNight:false,phase:'menstrual',star:false,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>phaseReason:'Black beans are iron-rich. Avocado provides anti-inflammatory omega-3s — perfect for menstruation.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>desc:'Cumin-spiced guacamole on sourdough with warm black beans. Mexican-inspired, iron-packed.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ingredients:[{n:'Ripe avocados',a:2,u:''},{n:'Lime juice',a:1,u:'tbsp'},{n:'Cumin + red chili',a:0.25,u:'tsp each'},{n:'Black beans, drained',a:0.5,u:'can'},{n:'Garlic powder',a:0.25,u:'tsp'},{n:'Sourdough bread + coriander',a:2,u:'slices'}],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>steps:['Mash avocado with lime, cumin, chili, salt.','Warm black beans with oil, cumin, garlic powder, 3–4 min.','Toast sourdough. Spread guac, top with beans and coriander.'],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>abheek:'Fried or poached egg on top.',nightPrep:'Season beans night before. Mash guac fresh.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>key:['avocado','lime','black beans','beans','sourdough','bread','garlic']},</p>
+<p class="p1">{name:'Mung bean coconut porridge',protein:18,carbs:38,fibre:8,time:'20 min',prepNight:true,phase:'follicular',star:false,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>phaseReason:'Whole moong is high in folate, zinc, and protein — the trifecta for follicular phase cellular growth.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>desc:'Whole green moong with coconut milk, jaggery, and cardamom. Southeast Asian-inspired breakfast that feels like dessert.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ingredients:[{n:'Whole green moong, soaked overnight',a:0.5,u:'cup'},{n:'Coconut milk',a:1,u:'cup'},{n:'Jaggery or brown sugar',a:1,u:'tbsp'},{n:'Cardamom',a:0.5,u:'tsp'},{n:'Salt',a:1,u:'pinch'},{n:'Toasted coconut flakes',a:1,u:'tbsp'}],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>steps:['Drain soaked moong. Simmer until very soft, 15–20 min.','Add coconut milk, jaggery, cardamom. Simmer 5 min.','Adjust consistency. Serve warm topped with coconut.'],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>abheek:'Naturally shareable.',nightPrep:'Soak moong overnight.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>key:['moong','green moong','coconut milk','jaggery','cardamom','coconut']},</p>
+<p class="p1">{name:'Red bean congee (hong dou zhou)',protein:14,carbs:42,fibre:9,time:'Set overnight + 5 min',prepNight:true,phase:'ovulatory',star:true,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>phaseReason:'Red beans are rich in antioxidants and fibre — supporting liver estrogen clearance at ovulation.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>desc:'Classic Chinese sweet-savoury red bean congee. Silky, earthy, deeply warming. Your congee maker\'s moment to shine.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ingredients:[{n:'Dried adzuki beans, soaked overnight',a:0.25,u:'cup'},{n:'Short-grain rice',a:0.25,u:'cup'},{n:'Jaggery or rock sugar',a:1,u:'tbsp'},{n:'Ginger sliver',a:1,u:''},{n:'Soy sauce + sesame oil (savoury option)',a:1,u:'tsp each'},{n:'Salt',a:1,u:'pinch'}],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>steps:['Drain soaked beans. Add to congee maker with rice, 4.5 cups water, ginger.','Set to cook overnight — low and slow.','Morning: stir, adjust consistency with hot water.','Sweet: stir in jaggery. Savoury: top with soy and sesame oil.'],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>abheek:'Savoury version — soft-boiled egg on top.',nightPrep:'Soak beans and set congee maker before bed.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>key:['adzuki','red beans','rice','jaggery','ginger','soy sauce','sesame']},</p>
+<p class="p1">{name:'Tofu scramble with roti (W4)',protein:20,carbs:33,fibre:4,time:'15 min',prepNight:false,phase:'luteal',star:false,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>phaseReason:'Tofu is high in calcium and isoflavones. Roti adds complex carbs to stabilize blood sugar.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>desc:'Turmeric-spiced tofu scramble served with warm roti. Reliable, protein-packed, endlessly customizable.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ingredients:[{n:'Firm tofu, crumbled',a:200,u:'g'},{n:'Onion, diced',a:0.5,u:''},{n:'Turmeric + cumin',a:0.5,u:'tsp each'},{n:'Nutritional yeast (optional)',a:1,u:'tsp'},{n:'Oil',a:1,u:'tsp'},{n:'Roti',a:2,u:''}],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>steps:['Press and crumble tofu.','Sauté onion 2 min. Add spices.','Add tofu, cook 5–6 min until slightly firm. Serve with warmed roti.'],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>abheek:'Scrambled egg on the side.',nightPrep:'Press and crumble tofu, chop onion.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>key:['tofu','onion','turmeric','cumin','roti']},</p>
+<p class="p1">{name:'Masala sweet potato hash',protein:15,carbs:45,fibre:10,time:'20 min',prepNight:true,phase:'luteal',star:false,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>phaseReason:'Sweet potato is rich in B6 and complex carbs. With chickpeas, a magnesium-rich luteal powerhouse.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>desc:'Air-fried sweet potato and chickpeas with cumin, coriander, and amchur. WFH Friday indulgence.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ingredients:[{n:'Sweet potato, cubed',a:1,u:'medium'},{n:'Chickpeas, drained',a:1,u:'can'},{n:'Cumin + coriander + amchur + red chili',a:0.5,u:'tsp each'},{n:'Oil',a:1,u:'tsp'},{n:'Greek yogurt',a:3,u:'tbsp'},{n:'Fresh coriander',a:1,u:'tbsp'}],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>steps:['Toss sweet potato and chickpeas with spices and oil.','Air fry at 400°F for 15 min, shake halfway.','Serve with coriander and a generous dollop of yogurt.'],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>abheek:'Fried egg on top.',nightPrep:'Roast Thursday evening. Reheat in air fryer 5 min.',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>key:['sweet potato','chickpeas','cumin','coriander','amchur','yogurt']}</p>
+<p class="p1">];</p>
+<p class="p2"><br></p>
+<p class="p1">const weekStructure=[</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{label:'Week 1',slots:[0,1,2,3,4],grocery:{'Protein':['Yellow moong dal','Silken tofu (300g)','Firm tofu (200g)','Paneer (150g — for paratha)','Red lentils'],'Produce':['Onions, tomatoes, garlic','Red bell pepper, green chili','Green onions, spinach, coriander','Ginger, lemon, cucumber, lime'],'Pantry':['Short-grain rice, rolled oats','Soy sauce, sesame oil, tahini','Sourdough, veg broth, whole wheat flour','Miso paste, chili oil, pita'],'Spices':['Cumin, smoked paprika, turmeric','Red chili flakes, garam masala'],'Dairy':['Ghee, Greek yogurt','Nutritional yeast (optional)']}},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{label:'Week 2',slots:[5,6,7,8,9],grocery:{'Protein':['Firm tofu (200g)','Edamame (frozen)','Greek yogurt','White beans (2 cans)','Paneer (150g — for paratha)'],'Produce':['Onions, cherry tomatoes, garlic','Avocados (2), lime','Green onions, coriander, parsley','Lemon, frozen berries'],'Pantry':['Short-grain rice, white miso','Soy sauce, sesame oil, nori','Sourdough, rotis, flatbread','Nut butter, granola, za\'atar, olive oil','Whole wheat flour'],'Spices':['Mustard seeds, turmeric, cumin','Cardamom, red chili, smoked paprika'],'Dairy':['Honey, ghee, yogurt']}},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{label:'Week 3',slots:[10,11,12,13,14],grocery:{'Protein':['Besan / chickpea flour','Firm tofu (200g)','Red lentils, roasted peanuts','Chickpeas (can)','Paneer (150g — for paratha)'],'Produce':['Onions, tomatoes, spinach','Green onions, cucumber','Ginger, lemon, green chili'],'Pantry':['Poha (flattened rice)','Short-grain rice, veg broth','Soy sauce, sesame oil','Rolled oats, gochujang paste','Rice vinegar, whole wheat flour'],'Spices':['Ajwain, mustard seeds, curry leaves','Cumin, turmeric, coriander powder'],'Dairy':['Ghee, yogurt']}},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{label:'Week 4',slots:[15,16,17,18,19],grocery:{'Protein':['Whole green moong','Adzuki beans (dried)','Firm tofu (200g)','Chickpeas (can), black beans (can)','Paneer (150g — for paratha)'],'Produce':['Sweet potato, avocados (2)','Lime, green chili','Coriander, lemon'],'Pantry':['Short-grain rice, coconut milk','Veg broth, jaggery','Toasted coconut flakes','Sourdough, rotis, whole wheat flour','Sesame oil, soy sauce'],'Spices':['Cumin, coriander powder, cardamom','Amchur, red chili, garlic powder','Turmeric, garam masala'],'Dairy':['Ghee, Greek yogurt']}}</p>
+<p class="p1">];</p>
+<p class="p2"><br></p>
+<p class="p1">const DAYS=['Mon','Tue','Wed','Thu','Fri'];</p>
+<p class="p1">let selWeek=0,selDay=null,servings=1,myIngredients=[],aiLoading=false;</p>
+<p class="p2"><br></p>
+<p class="p1">function showScreen(id,btn){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.querySelectorAll('.screen').forEach(s=&gt;s.classList.remove('active'));</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.querySelectorAll('.nav-btn').forEach(b=&gt;b.classList.remove('active'));</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById(id).classList.add('active');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(btn)btn.classList.add('active');</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function getPhaseInfo(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const start=new Date(document.getElementById('periodStart').value);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const cl=parseInt(document.getElementById('cycleLen').value)||32;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const pl=parseInt(document.getElementById('periodLen').value)||3;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const today=new Date();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const raw=Math.floor((today-start)/86400000)+1;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const d=((raw-1)%cl)+1;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const ov=Math.round(cl/2)-2;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>let phase;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(d&lt;=pl)phase='menstrual';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>else if(d&lt;=ov-1)phase='follicular';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>else if(d&lt;=ov+2)phase='ovulatory';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>else phase='luteal';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return{phase,day:d,cl,daysLeft:cl-d+1,pl,ov};</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function renderBannerAndBar(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const info=getPhaseInfo();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const c=PC[info.phase];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const s=SEEDS[info.phase];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('banner').innerHTML=`&lt;div class="dot" style="background:${c.dot}"&gt;&lt;/div&gt;&lt;div&gt;&lt;div class="banner-label"&gt;Day ${info.day} — ${c.label} phase&lt;/div&gt;&lt;div class="banner-sub"&gt;${PW[info.phase]} · ${info.daysLeft}d to next cycle&lt;/div&gt;&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const strip=document.getElementById('seedStrip');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>strip.style.background=c.bg;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>strip.innerHTML=`&lt;div&gt;&lt;h4 style="color:${c.text}"&gt;Seeds today&lt;/h4&gt;&lt;p style="color:${c.text}"&gt;${s.seeds}&lt;/p&gt;&lt;p class="why" style="color:${c.text}"&gt;${s.why}&lt;/p&gt;&lt;/div&gt;&lt;div&gt;&lt;h4 style="color:${c.text}"&gt;Fruits this phase&lt;/h4&gt;&lt;p style="color:${c.text}"&gt;${s.fruits}&lt;/p&gt;&lt;p class="why" style="color:${c.text}"&gt;${s.fruitWhy}&lt;/p&gt;&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const segs=[{id:'menstrual',label:'Menstrual',s:1,e:info.pl},{id:'follicular',label:'Follicular',s:info.pl+1,e:info.ov-1},{id:'ovulatory',label:'Ovulatory',s:info.ov,e:info.ov+2},{id:'luteal',label:'Luteal',s:info.ov+3,e:info.cl}];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('phaseBar').innerHTML=segs.map(sg=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const cc=PC[sg.id];</p>
+<p class="p1"><span class="Apple-converted-space">    </span>return`&lt;div class="phase-seg${sg.id===info.phase?' current':''}" style="flex:${Math.max(1,sg.e-sg.s+1)};background:${cc.bg}"&gt;&lt;span class="ph-name" style="color:${cc.text}"&gt;${sg.label}&lt;/span&gt;&lt;span class="ph-days" style="color:${cc.text}"&gt;${sg.s}–${sg.e}&lt;/span&gt;&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}).join('');</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function getWeekMeals(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const travel=document.getElementById('travelDay').value;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const slots=weekStructure[selWeek].slots;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const meals=slots.map((s,i)=&gt;({...allMeals[s],day:DAYS[i]}));</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const pk=travel==='sun'?'moong':'paneer';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const ps=travel==='sun'?0:1;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>meals[ps]={...parathas[pk],day:DAYS[ps]};</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return meals;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function renderDayGrid(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const meals=getWeekMeals();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const cur=getPhaseInfo().phase;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const travel=document.getElementById('travelDay').value;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const pDay=travel==='sun'?'Mon':'Tue';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('dayGrid').innerHTML=meals.map((m,i)=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const c=PC[m.phase];</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const isCur=m.phase===cur;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const isBolton=m.day===pDay&amp;&amp;m.boltonNote;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const bw=selDay===i?'2px':(isCur?'2px':'0.5px');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>return`&lt;div class="day-card${selDay===i?' selected':''}" onclick="selectDay(${i})" style="border-color:${isCur||selDay===i?c.dot:'var(--border)'};border-width:${bw}"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="day-label"&gt;${m.day}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="meal-name"&gt;${m.name}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style="display:flex;align-items:center;gap:2px;flex-wrap:wrap;margin-bottom:3px"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;span class="pip" style="background:${c.dot}"&gt;&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;span class="phase-tag" style="color:${c.text}"&gt;${c.label}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>${isCur?`&lt;span style="font-size:8px;background:${c.dot};color:#fff;padding:1px 4px;border-radius:999px"&gt;Now&lt;/span&gt;`:''}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="badges"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;span class="badge bp"&gt;${m.protein}g&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;span class="badge bt"&gt;${m.time.split('+')[0].split(',')[0].trim()}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>${isBolton?'&lt;span class="badge bb"&gt;Bolton&lt;/span&gt;':''}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>${m.prepNight&amp;&amp;!isBolton?'&lt;span class="badge bn"&gt;Prep night&lt;/span&gt;':''}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>${m.star?'&lt;span class="badge bstar"&gt;★ Special&lt;/span&gt;':''}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}).join('');</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function fmtAmt(a,s){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const v=a*s;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(v===Math.round(v))return String(v);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const fr={0.25:'¼',0.5:'½',0.75:'¾',0.33:'⅓',0.67:'⅔'};</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const w=Math.floor(v),f=parseFloat((v-w).toFixed(2));</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const fs=fr[f]||v.toFixed(1);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return w&gt;0?`${w} ${fs}`:fs;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function renderRecipePanel(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const panel=document.getElementById('recipePanel');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(selDay===null){panel.innerHTML='&lt;p class="empty"&gt;Tap a day to see the recipe&lt;/p&gt;';return;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const m=getWeekMeals()[selDay];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const c=PC[m.phase];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const s=SEEDS[m.phase];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const travel=document.getElementById('travelDay').value;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const pDay=travel==='sun'?'Mon':'Tue';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const isBolton=m.day===pDay&amp;&amp;m.boltonNote;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>panel.innerHTML=`&lt;div class="recipe-card" id="printArea"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="recipe-brand"&gt;BRKY&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;h2&gt;${m.name}&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;p class="recipe-desc"&gt;${m.desc}&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>${isBolton?`&lt;div class="bolton-note"&gt;Bolton prep: ${m.boltonNote}&lt;/div&gt;`:''}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="phase-reason" style="background:${c.bg};color:${c.text}"&gt;&lt;strong&gt;${c.label} phase:&lt;/strong&gt; ${m.phaseReason}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="seed-box" style="background:${c.bg}"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div&gt;&lt;h4 style="color:${c.text}"&gt;Seeds to add today&lt;/h4&gt;&lt;p style="color:${c.text}"&gt;${s.seeds}&lt;/p&gt;&lt;p class="why" style="color:${c.text}"&gt;${s.why}&lt;/p&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div&gt;&lt;h4 style="color:${c.text}"&gt;Best fruits this phase&lt;/h4&gt;&lt;p style="color:${c.text}"&gt;${s.fruits}&lt;/p&gt;&lt;p class="why" style="color:${c.text}"&gt;${s.fruitWhy}&lt;/p&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="macros" id="macros"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="srv-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;label&gt;Servings&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="srv-btn" onclick="chgSrv(-1)"&gt;−&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="srv-count" id="srvCount"&gt;${servings}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="srv-btn" onclick="chgSrv(1)"&gt;+&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="rsec"&gt;&lt;h3&gt;Ingredients&lt;/h3&gt;&lt;ul id="ingList"&gt;&lt;/ul&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="rsec"&gt;&lt;h3&gt;Steps&lt;/h3&gt;&lt;ol&gt;${m.steps.map(st=&gt;`&lt;li&gt;${st}&lt;/li&gt;`).join('')}&lt;/ol&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>${m.nightPrep?`&lt;div class="rsec"&gt;&lt;h3&gt;${isBolton?'Bolton notes':'Night-before prep'}&lt;/h3&gt;&lt;p style="font-size:13px;color:var(--text)"&gt;${m.nightPrep}&lt;/p&gt;&lt;/div&gt;`:''}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="abheek"&gt;For Abheek: ${m.abheek}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="print-btn" onclick="window.print()"&gt;Print this recipe&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>updMacros();</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function updMacros(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(selDay===null)return;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const m=getWeekMeals()[selDay];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('macros').innerHTML=`</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="mc"&gt;&lt;span class="mc-val"&gt;${Math.round(m.protein*servings)}g&lt;/span&gt;&lt;div class="mc-lbl"&gt;Protein&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="mc"&gt;&lt;span class="mc-val"&gt;${Math.round(m.carbs*servings)}g&lt;/span&gt;&lt;div class="mc-lbl"&gt;Carbs&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="mc"&gt;&lt;span class="mc-val"&gt;${Math.round(m.fibre*servings)}g&lt;/span&gt;&lt;div class="mc-lbl"&gt;Fibre&lt;/div&gt;&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('srvCount').textContent=servings;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('ingList').innerHTML=m.ingredients.map(ing=&gt;`&lt;li&gt;${fmtAmt(ing.a,servings)}${ing.u?' '+ing.u:''} ${ing.n}&lt;/li&gt;`).join('');</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function chgSrv(d){servings=Math.max(1,Math.min(6,servings+d));updMacros();}</p>
+<p class="p1">function selectDay(i){selDay=i;servings=1;renderDayGrid();renderRecipePanel();}</p>
+<p class="p2"><br></p>
+<p class="p1">function renderGrocery(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const g=weekStructure[selWeek].grocery;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('groceryGrid').innerHTML=Object.entries(g).map(([cat,items])=&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>`&lt;div class="grocery-cat"&gt;&lt;h4&gt;${cat}&lt;/h4&gt;&lt;ul&gt;${items.map(i=&gt;`&lt;li&gt;${i}&lt;/li&gt;`).join('')}&lt;/ul&gt;&lt;/div&gt;`</p>
+<p class="p1"><span class="Apple-converted-space">  </span>).join('');</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function renderPlan(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>selDay=null;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>renderBannerAndBar();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('weekTabs').innerHTML=weekStructure.map((w,i)=&gt;`&lt;button class="week-tab${i===selWeek?' active':''}" onclick="selectWeek(${i})"&gt;${w.label}&lt;/button&gt;`).join('');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>renderDayGrid();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>renderRecipePanel();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>renderGrocery();</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function selectWeek(i){selWeek=i;selDay=null;servings=1;renderPlan();}</p>
+<p class="p2"><br></p>
+<p class="p1">// MATCHER</p>
+<p class="p1">function addIngredient(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const inp=document.getElementById('ingInput');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const val=inp.value.trim().toLowerCase();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(!val)return;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>val.split(',').map(v=&gt;v.trim()).filter(Boolean).forEach(p=&gt;{if(p&amp;&amp;!myIngredients.includes(p))myIngredients.push(p);});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>inp.value='';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>renderMatcher();</p>
+<p class="p1">}</p>
+<p class="p1">function removeIngredient(i){myIngredients.splice(i,1);renderMatcher();}</p>
+<p class="p2"><br></p>
+<p class="p1">async function renderMatcher(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('tagCloud').innerHTML=myIngredients.map((ing,i)=&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>`&lt;div class="ing-tag"&gt;${ing}&lt;span class="rm" onclick="removeIngredient(${i})"&gt;×&lt;/span&gt;&lt;/div&gt;`</p>
+<p class="p1"><span class="Apple-converted-space">  </span>).join('');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const results=document.getElementById('matchResults');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(!myIngredients.length){results.innerHTML='&lt;p class="empty"&gt;Add ingredients above to get AI suggestions&lt;/p&gt;';return;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(aiLoading)return;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>aiLoading=true;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>results.innerHTML='&lt;p class="loading"&gt;Finding the best breakfasts for you...&lt;/p&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const info=getPhaseInfo();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const phaseLabel=PC[info.phase].label;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const c=PC[info.phase];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const prompt=`You are BRKY, a cycle-aware vegetarian breakfast advisor.</p>
+<p class="p1">The user is in their ${phaseLabel} phase. They are vegetarian and do NOT eat eggs (their husband does).</p>
+<p class="p1">They have: ${myIngredients.join(', ')}.</p>
+<p class="p1">They also likely have: olive oil, salt, pepper, basic spices (cumin, turmeric, coriander), water, garlic, onion, ginger, vinegar, lemon.</p>
+<p class="p1">Suggest exactly 4 warm vegetarian breakfasts. Vary cuisines globally — Japanese, Mexican, Mediterranean, Korean, Middle Eastern, Indian, etc. Make them protein-rich and warming. Max 6 ingredients and 20 min each. At least one should be relevant to the ${phaseLabel} phase.</p>
+<p class="p1">Respond ONLY in this exact JSON (no markdown, no extra text):</p>
+<p class="p1">[{"name":"","cuisine":"","desc":"One sentence.","protein":0,"carbs":0,"fibre":0,"time":"","phaseNote":"Why good for ${phaseLabel} phase, one sentence.","steps":["","","",""],"extraNeeded":[]},...]`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>try{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const res=await fetch('https://api.anthropic.com/v1/messages',{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>method:'POST',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>headers:{'Content-Type':'application/json'},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1200,messages:[{role:'user',content:prompt}]})</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const data=await res.json();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const txt=data.content.filter(b=&gt;b.type==='text').map(b=&gt;b.text).join('');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const suggestions=JSON.parse(txt.replace(/```json|```/g,'').trim());</p>
+<p class="p1"><span class="Apple-converted-space">    </span>results.innerHTML=suggestions.map(s=&gt;`&lt;div class="match-card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;h3&gt;${s.name} &lt;span class="ai-tag"&gt;AI&lt;/span&gt;&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="match-meta"&gt;${s.cuisine} · ${s.time}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;p class="match-desc"&gt;${s.desc}&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:6px"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;span class="badge bp"&gt;${s.protein}g protein&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;span class="badge bt"&gt;${s.carbs}g carbs&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;span class="badge bt"&gt;${s.fibre}g fibre&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style="font-size:12px;padding:6px 9px;border-radius:var(--radius-sm);background:${c.bg};color:${c.text};margin-bottom:8px"&gt;${s.phaseNote}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="match-steps rsec"&gt;&lt;h3&gt;Steps&lt;/h3&gt;&lt;ol&gt;${s.steps.map(st=&gt;`&lt;li&gt;${st}&lt;/li&gt;`).join('')}&lt;/ol&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>${s.extraNeeded&amp;&amp;s.extraNeeded.length?`&lt;p class="match-need"&gt;Might also need: ${s.extraNeeded.join(', ')}&lt;/p&gt;`:''}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;`).join('');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}catch(e){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>results.innerHTML='&lt;p class="empty"&gt;Could not get suggestions — check your connection and try again.&lt;/p&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>aiLoading=false;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">renderPlan();</p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
